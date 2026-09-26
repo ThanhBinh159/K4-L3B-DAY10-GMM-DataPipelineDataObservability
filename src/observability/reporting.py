@@ -1,6 +1,15 @@
 from __future__ import annotations
 
+import json
 from typing import Any
+
+from core.utils import write_text
+
+
+def _format_value(value: Any) -> str:
+    if isinstance(value, (dict, list)):
+        return json.dumps(value, ensure_ascii=False, indent=2)
+    return str(value)
 
 
 def generate_phase1_report(
@@ -10,15 +19,29 @@ def generate_phase1_report(
     quality: dict[str, Any],
     freshness: dict[str, Any],
 ) -> None:
-    """TODO(student): viet markdown report cho baseline phase.
-
-    Pseudo-code:
-    1. Gom source summary.
-    2. In metrics retrieval/evaluation.
-    3. In data quality va freshness.
-    4. Ghi markdown vao report_path.
-    """
-    raise NotImplementedError("Student task: implement phase 1 report.")
+    """Write the baseline pipeline summary as a Markdown report."""
+    lines = [
+        "# Phase 1 Report",
+        "",
+        "## Source",
+        "",
+        *[f"- **{key}:** {_format_value(value)}" for key, value in source_summary.items()],
+        "",
+        "## Metrics",
+        "",
+        *[f"- **{key}:** {_format_value(value)}" for key, value in metrics.items()],
+        "",
+        "## Data Quality",
+        "",
+        f"- **success:** {quality.get('success')}",
+        f"- **stage:** {quality.get('stage')}",
+        "",
+        "## Freshness",
+        "",
+        *[f"- **{key}:** {_format_value(value)}" for key, value in freshness.items()],
+        "",
+    ]
+    write_text(report_path, "\n".join(lines))
 
 
 def generate_corruption_report(
