@@ -1,0 +1,52 @@
+{
+  "original_rows": 24,
+  "corrupted_rows": 20,
+  "operations": [
+    {
+      "type": "drop_latest_records",
+      "count": 5,
+      "paper_ids": [
+        "10.21203/rs.3.rs-10489777/v1",
+        "10.70267/aitia.2026482489",
+        "10.21203/rs.3.rs-10349437/v1",
+        "10.54254/2755-2721/2026.36624",
+        "10.36887/2415-8453-2026-3-2"
+      ]
+    },
+    {
+      "type": "blank_summary",
+      "count": 1,
+      "paper_ids": [
+        "10.28932/jutisi.v12i2.13099"
+      ]
+    },
+    {
+      "type": "inject_noise",
+      "count": 1,
+      "paper_ids": [
+        "10.20944/preprints202608.1849.v1"
+      ]
+    },
+    {
+      "type": "truncate_title",
+      "count": 1,
+      "paper_ids": [
+        "10.21203/rs.3.rs-10423755/v1"
+      ]
+    },
+    {
+      "type": "stale_date",
+      "count": 1,
+      "paper_ids": [
+        "10.3390/knowledge6030022"
+      ]
+    },
+    {
+      "type": "duplicate_rows",
+      "count": 1,
+      "paper_ids": [
+        "10.36948/ijfmr.2026.v08i04.85777"
+      ]
+    }
+  ]
+}
