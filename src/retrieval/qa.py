@@ -32,6 +32,16 @@ def _extract_answer(question: str, top_result: SearchResult) -> str:
 def answer_question(question: str, settings: Settings, index: LocalEmbeddingIndex, top_k: int | None = None) -> AnswerResult:
     title_match = re.search(r"'([^']+)'", question)
     exact = index.lookup(title_match.group(1)) if title_match else None
+
+    if title_match and exact is None:
+        return AnswerResult(
+            question=question,
+            answer="Không tìm thấy tiêu đề này trong kho dữ liệu đã index.",
+            retrieved_doc_ids=[],
+            retrieved_contexts=[],
+            retrieved_titles=[],
+        )
+
     retrieved = index.search(question, top_k=top_k)
     if exact:
         exact_result = SearchResult(
